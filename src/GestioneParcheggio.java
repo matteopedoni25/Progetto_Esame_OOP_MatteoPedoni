@@ -38,22 +38,17 @@ public class GestioneParcheggio {
         return Optional.empty();
     }
 
-/*    public Optional<Piano> trovaPianoxTarga(String targa) {
+
+    public Optional<Piano> trovaPianoxTarga(String targa) {
         return piani.stream()
-                .filter(p -> p.getScontrino().contains(targa))
-                .findFirst();
+                // Filtra i piani: tieni solo quelli che soddisfano la condizione
+                .filter(piano -> piano.getScontrino() // Per ogni piano, prendi la lista di scontrini
+                        .stream() // Crea uno stream di scontrini
+                        // anyMatch controlla se almeno un elemento dello stream matcha la condizione
+                        .anyMatch(scontrino -> scontrino.getTarga_utente().equals(targa)))
+                .findFirst(); // Prendi il primo piano che ha superato il filtro
     }
-*/
-public Optional<Piano> trovaPianoxTarga(String targa) {
-    return piani.stream()
-            // Filtra i piani: tieni solo quelli che soddisfano la condizione
-            .filter(piano -> piano.getScontrino() // Per ogni piano, prendi la lista di scontrini
-                    .stream() // Crea uno stream di scontrini
-                    // anyMatch controlla se almeno un elemento dello stream matcha la condizione
-                    .anyMatch(scontrino -> scontrino.getTarga_utente().equals(targa)))
-            .findFirst(); // Prendi il primo piano che ha superato il filtro
-}
-    public void registraUscitaPerTarga(String targa) {
+    public Optional<Scontrino> registraUscitaPerTarga(String targa) {
         // 1. Trova il piano dove si trova l'auto
         Optional<Piano> pianoOpt = trovaPianoxTarga(targa);
 
@@ -73,9 +68,10 @@ public Optional<Piano> trovaPianoxTarga(String targa) {
                 // 4. Registra l'uscita usando il metodo della classe Piano
                 //    Assumiamo che Orario.adesso() ti dia l'orario corrente.
                 Orario orarioDiUscita = Orario.adesso();
-                pianoTrovato.registraUscita(scontrinoDaRegistrare, orarioDiUscita);
+                 pianoTrovato.registraUscita(scontrinoDaRegistrare, orarioDiUscita);
             }
         }
+        return Optional.empty();
     }
 }
 
