@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MenuPrincipale {
@@ -21,9 +22,16 @@ public class MenuPrincipale {
             System.out.println("1. Modalità Utente");
             System.out.println("2. Modalità Gestore");
             System.out.println("Inserisci Selezione: ");
-            int in =  scanner.nextInt();
-            scanner.nextLine();
-            switch(in){
+            int op = 0;
+            try{
+                op = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("ERRORE INSERIMENTO!!\nINSERISCI UN NUMERO DA 1 A 2");
+                scanner.nextLine();
+                continue;
+            }
+            switch(op){
                 case 1:
                     menuUtente.MostraMenu();
                     break;

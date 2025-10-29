@@ -39,6 +39,7 @@ public class GestioneParcheggio {
     }
 
 
+
     public Optional<Piano> trovaPianoxTarga(String targa) {
         return piani.stream()
                 // Filtra i piani: tieni solo quelli che soddisfano la condizione
@@ -49,29 +50,26 @@ public class GestioneParcheggio {
                 .findFirst(); // Prendi il primo piano che ha superato il filtro
     }
     public Optional<Scontrino> registraUscitaPerTarga(String targa) {
-        // 1. Trova il piano dove si trova l'auto
+        //Trova il piano dove si trova l'auto
         Optional<Piano> pianoOpt = trovaPianoxTarga(targa);
 
-        // 2. Se il piano è stato trovato, procedi
+        //Se il piano è stato trovato, procedi
         if (pianoOpt.isPresent()) {
             Piano pianoTrovato = pianoOpt.get();
 
-            // 3. Ora trova lo scontrino ESATTO dentro il piano trovato
-            //    Questo è necessario per passarlo al metodo registraUscita del piano.
+            //Trova lo scontrino ESATTO dentro il piano trovato
+            //Questo è necessario per passarlo al metodo registraUscita del piano.
             Optional<Scontrino> scontrinoOpt = pianoTrovato.getScontrino().stream()
-                    .filter(s -> s.getTarga_utente().equals(targa))
+                    .filter(s -> s.getTarga_utente().equals(targa) && s.getOrario_Uscita() == null)
                     .findFirst();
 
             if (scontrinoOpt.isPresent()) {
                 Scontrino scontrinoDaRegistrare = scontrinoOpt.get();
-
-                // 4. Registra l'uscita usando il metodo della classe Piano
-                //    Assumiamo che Orario.adesso() ti dia l'orario corrente.
-                Orario orarioDiUscita = Orario.adesso();
-                 pianoTrovato.registraUscita(scontrinoDaRegistrare, orarioDiUscita);
+                pianoTrovato.registraUscita(scontrinoDaRegistrare, Orario.adesso());
+                return Optional.of(scontrinoDaRegistrare);
             }
         }
-        return Optional.empty();
+        return Optional.empty(); //se il piano o lo scontrino non sono stati trovati, restituisce un Optional vuoto
     }
 }
 

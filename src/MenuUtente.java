@@ -1,3 +1,4 @@
+import java.util.InputMismatchException;
 import java.util.Optional;
 import  java.util.Scanner;
 
@@ -20,8 +21,15 @@ public class MenuUtente {
                 System.out.println("3. Verifica disponibilità posto");
                 System.out.println("4. Trova il tuo veicolo: ");
                 System.out.println("Inserisci Selezione: ");
-                int op = scanner.nextInt();
+                int op = 0;
+                try{
+                 op = scanner.nextInt();
                 scanner.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("ERRORE INSERIMENTO!!\nINSERISCI UN NUMERO DA 1 A 4");
+                    scanner.nextLine();
+                    continue;
+                }
                 switch(op){
                     case 1:
                         registraIngresso();
@@ -47,23 +55,33 @@ public class MenuUtente {
     public void registraIngresso(){
         System.out.println("Inserisci targa: ");
         String targaIN = scanner.next();
-        Optional<Scontrino> scontrinoOpt = gestioneParcheggio.RegistraIngresso(targaIN);
-        Scontrino scontrino = scontrinoOpt.orElse(null);
-        Optional<Piano> pianoOpt =  gestioneParcheggio.trovaPianoxTarga(targaIN);
-        Piano piano = pianoOpt.get();
-        System.out.println("Recarsi al piano: "+piano.getNumPiano());
-        System.out.println("Conserva lo scontrino fino all'uscita: ");
-        System.out.println(scontrino);
+        Optional<Piano> check =  gestioneParcheggio.trovaPianoxTarga(targaIN); //Controllo se la targa è gia presente nel parcheggio
+        if(!check.isPresent()){
+            Optional<Scontrino> scontrinoOpt = gestioneParcheggio.RegistraIngresso(targaIN);
+            Scontrino scontrino = scontrinoOpt.orElse(null);
+            Optional<Piano> pianoOpt =   gestioneParcheggio.trovaPianoxTarga(targaIN);
+            Piano piano = pianoOpt.get();
+            System.out.println("Recarsi al piano: "+piano.getNumPiano());
+            System.out.println("Conserva lo scontrino fino all'uscita: ");
+            System.out.println(scontrino.stampaIngresso());
+        }
+        else{
+            System.out.println("ERRORE: La targa inserita è gia presente nel parcheggio");
+        }
     }
 
     public void registraUscita(){
         System.out.println("Inserisci targa: ");
         String targaOUT = scanner.next();
         Optional<Scontrino> scontrinoOpt = gestioneParcheggio.registraUscitaPerTarga(targaOUT);
-        Scontrino scontrino = scontrinoOpt.orElse(null);
-        System.out.println("Uscita registrata con successo!");
-        System.out.println("Scontrino finale:");
-        System.out.println(scontrino);
+        if (scontrinoOpt.isPresent()) {
+            System.out.println("Uscita registrata con successo!");
+            System.out.println("Scontrino finale: ");
+            System.out.println(scontrinoOpt.get());
+        }
+        else {
+            System.out.println("ERRORE: Impossibile registrare l'uscita. Veicolo non trovato o già uscito. ");
+        }
 
     }
 }

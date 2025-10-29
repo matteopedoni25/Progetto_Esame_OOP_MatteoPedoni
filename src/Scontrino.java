@@ -69,6 +69,10 @@ public class Scontrino {
         return Orario_Uscita != null;
     }
 
+    public String stampaIngresso() {
+        return "Scontrino Ingresso: [TARGA: " + getTarga_utente() + ", DATA: " + getData() +
+                ", ENTRATA: " + getOrario_Arrivo() + "]";
+    }
 
     @Override
     public String toString() {
