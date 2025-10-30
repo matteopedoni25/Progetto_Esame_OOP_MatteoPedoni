@@ -5,10 +5,10 @@ public class MenuPrincipale {
     private GestioneParcheggio gestioneParcheggio;
     private Scanner scanner;
     private MenuUtente menuUtente;
-
+    private static final String NOME_FILE_SALVATAGGIO = "parcheggio.ser"; // Nome del file di salvataggio
 
     public MenuPrincipale(){
-        this.gestioneParcheggio = new GestioneParcheggio();
+        this.gestioneParcheggio = GestioneParcheggio.caricaStato(NOME_FILE_SALVATAGGIO);
         this.scanner = new Scanner(System.in);
         this.menuUtente = new MenuUtente(gestioneParcheggio, scanner);
     }
@@ -21,6 +21,7 @@ public class MenuPrincipale {
             System.out.println("\n=== MENU PRINCIPALE ===");
             System.out.println("1. Modalità Utente");
             System.out.println("2. Modalità Gestore");
+            System.out.println("3. Salva ed Esci");
             System.out.println("Inserisci Selezione: ");
             int op = 0;
             try{
@@ -35,6 +36,15 @@ public class MenuPrincipale {
                 case 1:
                     menuUtente.MostraMenu();
                     break;
+                case 2:
+                    // Qui andrebbe il menu gestore
+                    System.out.println("Modalità gestore non ancora implementata.");
+                    break;
+                case 3:
+                    // Salva lo stato attuale prima di uscire
+                    gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
+                    System.out.println("Arrivederci!");
+                    return;
                 default:
                     System.out.println("Inserimento scelta invalida");
             }

@@ -1,9 +1,12 @@
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.io.*;
 import java.util.stream.Stream;
 
-public class GestioneParcheggio {
+public class GestioneParcheggio implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Piano> piani; //il parcheggio avra più piani, quindi è neccessaria una lista di piani
 
     //Costruttore che inizializza i piani, con dei posti disponibili, del parcheggio
@@ -46,7 +49,7 @@ public class GestioneParcheggio {
                 .filter(piano -> piano.getScontrino() // Per ogni piano, prendi la lista di scontrini
                         .stream() // Crea uno stream di scontrini
                         // anyMatch controlla se almeno un elemento dello stream matcha la condizione
-                        .anyMatch(scontrino -> scontrino.getTarga_utente().equals(targa)))
+                        .anyMatch(scontrino -> scontrino.getTarga_utente().equals(targa) && scontrino.getOrario_Uscita() == null))
                 .findFirst(); // Prendi il primo piano che ha superato il filtro
     }
     public Optional<Scontrino> registraUscitaPerTarga(String targa) {
@@ -71,7 +74,40 @@ public class GestioneParcheggio {
         }
         return Optional.empty(); //se il piano o lo scontrino non sono stati trovati, restituisce un Optional vuoto
     }
+
+    public static void salvaStato(GestioneParcheggio gestione, String nomeFile) {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
+            oos.writeObject(gestione);
+            System.out.println("Dati del parcheggio salvati con successo in " + nomeFile);
+        } catch (IOException e) {
+            System.out.println("Errore durante il salvataggio dei dati: " + e.getMessage());
+        }
+    }
+
+    /**
+     * Carica lo stato del parcheggio da un file.
+     * @param nomeFile Il nome del file da cui caricare.
+     * @return L'oggetto GestioneParcheggio caricato, o null se non trovato.
+     */
+    public static GestioneParcheggio caricaStato(String nomeFile) {
+        File file = new File(nomeFile);
+        if (!file.exists()) {
+            System.out.println("Nessun dato precedente trovato. Inizio con un nuovo parcheggio.");
+            return new GestioneParcheggio(); // Se il file non esiste, crea un nuovo parcheggio
+        }
+
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomeFile))) {
+            GestioneParcheggio gestione = (GestioneParcheggio) ois.readObject();
+            System.out.println("Dati del parcheggio caricati con successo da " + nomeFile);
+            return gestione;
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Errore durante il caricamento dei dati: " + e.getMessage());
+            // In caso di errore, restituisce comunque un nuovo parcheggio vuoto
+            return new GestioneParcheggio();
+        }
+    }
 }
+
 
 
 

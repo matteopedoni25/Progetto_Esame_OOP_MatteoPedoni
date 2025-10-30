@@ -1,6 +1,9 @@
+import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;;
-public class Piano {
+
+public class Piano implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int numPiano;
     private int postiTot;
     private int postiDisponibili;

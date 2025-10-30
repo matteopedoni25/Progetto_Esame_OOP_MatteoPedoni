@@ -1,7 +1,9 @@
-
+import java.io.Serializable;
 import java.time.LocalTime;
 import java.time.Duration;
-public class Orario {
+
+public class Orario implements Serializable {
+    private static final long serialVersionUID = 1L;
     private int ora;
     private int minuti;
 

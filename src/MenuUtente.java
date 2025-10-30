@@ -13,13 +13,14 @@ public class MenuUtente {
     }
 
     public void MostraMenu(){
-        while(true){
-            System.out.println(" === MENU UTENTE === ");
-            while(true){
+        boolean continua = true;
+        while(continua){
+                System.out.println(" === MENU UTENTE === ");
                 System.out.println("1. Registra Ingresso");
                 System.out.println("2. Registra Uscita");
                 System.out.println("3. Verifica disponibilità posto");
                 System.out.println("4. Trova il tuo veicolo: ");
+                System.out.println("5. Torna al Menu Principale: ");
                 System.out.println("Inserisci Selezione: ");
                 int op = 0;
                 try{
@@ -45,13 +46,16 @@ public class MenuUtente {
                         Optional<Piano> pianoOpt =  gestioneParcheggio.trovaPianoxTarga(targaV);
                         Piano piano = pianoOpt.get();
                         System.out.println("Il tuo veicolo si trova al piano: "+piano.getNumPiano());
-
+                        break;
+                    case 5:
+                        continua = false;
+                        break;
                     default:
                         System.out.println("Inserimento scelta invalida");
                 }
             }
         }
-    }
+
     public void registraIngresso(){
         System.out.println("Inserisci targa: ");
         String targaIN = scanner.next();
