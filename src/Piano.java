@@ -39,7 +39,7 @@ public class Piano implements Serializable {
         return postiOccupati;
     }
 
-    public List<Scontrino> getScontrino() {
+    public List<Scontrino> getScontrini() {
         return scontrini;
     }
 
@@ -58,9 +58,9 @@ public class Piano implements Serializable {
 
 
 
-    public void registraUscita(Scontrino scontrino, Orario Orario_Uscita) {
+    public void registraUscita(Scontrino scontrino, Data dataOUT , Orario Orario_Uscita) {
         if (scontrini.contains(scontrino) && !scontrino.Pay()) {
-            scontrino.registraUscita(Orario_Uscita);
+            scontrino.registraUscita(dataOUT,Orario_Uscita);
             postiDisponibili++;
             postiOccupati--;
         }
@@ -70,8 +70,9 @@ public class Piano implements Serializable {
     //Metodi utili per le statistiche lato gestore
     public int ContaScontrini(){
         int tot=0;
+        Data oggi = Data.Oggi();
         for (Scontrino scontrino : scontrini) {
-            if(scontrino.Pay()){
+            if(scontrino.Pay() && scontrino.getDataOUT() != null &&scontrino.getDataOUT().equals(oggi)){
                 tot++;
             }
         }
@@ -79,7 +80,7 @@ public class Piano implements Serializable {
     }
     //Stringa dati del piano
     public String toString() {
-        return "[Piano: " + numPiano + "\nPosti Disponibili: " + postiDisponibili +"\nPosti Occupati:"+postiOccupati+"\nScontrini Completati: "+ContaScontrini()+"]";
+        return "[Piano: " + numPiano + "\nPosti Disponibili: " + postiDisponibili +"\nPosti Occupati:"+postiOccupati+"]";
     }
 
 }

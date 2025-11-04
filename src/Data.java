@@ -52,6 +52,33 @@ public class Data implements Serializable {
     }
 
     @Override
+    public  boolean equals(Object obj) {
+        // 1. Controlla se è lo stesso identico oggetto in memoria
+        if (this == obj) {
+            return true;
+        }
+
+        // 2. Controlla se l'oggetto è nullo o di una classe diversa
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        // 3. Converte l'oggetto (che sappiamo essere di tipo Data)
+        Data data = (Data) obj;
+
+        // 4. Confronta i campi (uso i nomi del tuo file)
+        return Anno == data.Anno &&
+                Mese == data.Mese &&
+                Giorno == data.Giorno;
+    }
+
+    @Override
+    public int hashCode() {
+        // Questo è importante da aggiungere quando si sovrascrive equals
+        return java.util.Objects.hash(Anno, Mese, Giorno);
+    }
+
+    @Override
     public String toString() {
         return + Anno + "/" + Mese + "/" + Giorno;
     }

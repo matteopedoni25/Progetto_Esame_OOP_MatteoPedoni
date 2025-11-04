@@ -25,9 +25,10 @@ public class Orario implements Serializable {
         return LocalTime.of(ora, minuti);
     }
 
-    public int calcolaDifferenza(Orario oraOut){ //Calcolo la differenza in minuti tra l'ora d'entrata e quella di uscita
-        return (int) Duration.between(this.toLocalTime(), oraOut.toLocalTime()).toMinutes();
-    }
+   /* public long calcolaDifferenza(Orario oraOut){//Calcolo la differenza in minuti tra l'ora d'entrata e quella di uscita
+        return (long) Duration.between(this.toLocalTime(), oraOut.toLocalTime()).toMinutes();
+    }*/
+
     @Override
     public String toString() {
         return String.format("%02d:%02d", ora, minuti);

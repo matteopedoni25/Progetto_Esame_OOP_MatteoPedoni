@@ -5,12 +5,14 @@ public class MenuPrincipale {
     private GestioneParcheggio gestioneParcheggio;
     private Scanner scanner;
     private MenuUtente menuUtente;
+    private MenuGestore menuGestore;
     private static final String NOME_FILE_SALVATAGGIO = "parcheggio.ser"; // Nome del file di salvataggio
 
     public MenuPrincipale(){
         this.gestioneParcheggio = GestioneParcheggio.caricaStato(NOME_FILE_SALVATAGGIO);
         this.scanner = new Scanner(System.in);
         this.menuUtente = new MenuUtente(gestioneParcheggio, scanner);
+        this.menuGestore = new MenuGestore(gestioneParcheggio, scanner);
     }
 
     public void avviaMenu(){
@@ -34,11 +36,10 @@ public class MenuPrincipale {
             }
             switch(op){
                 case 1:
-                    menuUtente.MostraMenu();
+                    menuUtente.MostraMenuUtente();
                     break;
                 case 2:
-                    // Qui andrebbe il menu gestore
-                    System.out.println("Modalità gestore non ancora implementata.");
+                    menuGestore.MostraMenuGetsore();
                     break;
                 case 3:
                     // Salva lo stato attuale prima di uscire

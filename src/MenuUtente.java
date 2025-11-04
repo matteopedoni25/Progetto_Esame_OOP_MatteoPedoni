@@ -1,6 +1,6 @@
 import java.util.InputMismatchException;
 import java.util.Optional;
-import  java.util.Scanner;
+import java.util.Scanner;
 
 
 public class MenuUtente {
@@ -12,13 +12,13 @@ public class MenuUtente {
         this.scanner = scanner;
     }
 
-    public void MostraMenu(){
+    public void MostraMenuUtente(){
         boolean continua = true;
         while(continua){
                 System.out.println(" === MENU UTENTE === ");
                 System.out.println("1. Registra Ingresso");
                 System.out.println("2. Registra Uscita");
-                System.out.println("3. Verifica disponibilità posto");
+                System.out.println("3. Verifica stato parcheggio");
                 System.out.println("4. Trova il tuo veicolo: ");
                 System.out.println("5. Torna al Menu Principale: ");
                 System.out.println("Inserisci Selezione: ");
@@ -39,6 +39,7 @@ public class MenuUtente {
                         registraUscita();
                         break;
                     case 3:
+                        gestioneParcheggio.toString();
                             break;
                     case 4:
                         System.out.println("Inserisci targa: ");

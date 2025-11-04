@@ -3,7 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.io.*;
-import java.util.stream.Stream;
 
 public class GestioneParcheggio implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -46,7 +45,7 @@ public class GestioneParcheggio implements Serializable {
     public Optional<Piano> trovaPianoxTarga(String targa) {
         return piani.stream()
                 // Filtra i piani: tieni solo quelli che soddisfano la condizione
-                .filter(piano -> piano.getScontrino() // Per ogni piano, prendi la lista di scontrini
+                .filter(piano -> piano.getScontrini() // Per ogni piano, prendi la lista di scontrini
                         .stream() // Crea uno stream di scontrini
                         // anyMatch controlla se almeno un elemento dello stream matcha la condizione
                         .anyMatch(scontrino -> scontrino.getTarga_utente().equals(targa) && scontrino.getOrario_Uscita() == null))
@@ -62,13 +61,13 @@ public class GestioneParcheggio implements Serializable {
 
             //Trova lo scontrino ESATTO dentro il piano trovato
             //Questo è necessario per passarlo al metodo registraUscita del piano.
-            Optional<Scontrino> scontrinoOpt = pianoTrovato.getScontrino().stream()
+            Optional<Scontrino> scontrinoOpt = pianoTrovato.getScontrini().stream()
                     .filter(s -> s.getTarga_utente().equals(targa) && s.getOrario_Uscita() == null)
                     .findFirst();
 
             if (scontrinoOpt.isPresent()) {
                 Scontrino scontrinoDaRegistrare = scontrinoOpt.get();
-                pianoTrovato.registraUscita(scontrinoDaRegistrare, Orario.adesso());
+                pianoTrovato.registraUscita(scontrinoDaRegistrare, Data.Oggi(),Orario.adesso());
                 return Optional.of(scontrinoDaRegistrare);
             }
         }
@@ -105,6 +104,17 @@ public class GestioneParcheggio implements Serializable {
             // In caso di errore, restituisce comunque un nuovo parcheggio vuoto
             return new GestioneParcheggio();
         }
+    }
+
+    public String visualizzaParcheggio() {
+        for(Piano piano : piani) {
+            System.out.println(piano.toString());
+        }
+        return null;
+    }
+
+    public String toString() {
+        return visualizzaParcheggio();
     }
 }
 
