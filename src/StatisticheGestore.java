@@ -1,5 +1,6 @@
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class StatisticheGestore{
@@ -32,10 +33,17 @@ public class StatisticheGestore{
         return gestioneParcheggio.getPiani().stream()
                 .flatMap(piano -> piano.getScontrini().stream())
                 .filter(Scontrino::Pay)
-                .filter(scontrino -> scontrino.getDataOUT().equals(dataIN))
+                .filter(scontrino -> scontrino.getDataOUT() != null && scontrino.getDataOUT().equals(dataIN))
                 .mapToDouble(Scontrino::getPrezzo)
                 .sum();
     }
 
+    public int contaScontriniPerGiorno(Data dataIN) {
+        return (int) gestioneParcheggio.getPiani().stream()
+                .flatMap(piano -> piano.getScontrini().stream())
+                .filter(Scontrino::Pay)
+                .filter(scontrino -> Objects.equals(scontrino.getDataOUT(), dataIN))
+                .count();
+    }
 
 }

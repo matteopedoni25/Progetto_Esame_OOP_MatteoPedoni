@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class MenuUtente {
     private GestioneParcheggio gestioneParcheggio;
     private Scanner scanner;
+    private static final String NOME_FILE_SALVATAGGIO = "parcheggio.ser"; // Nome del file di salvataggio
 
     public MenuUtente(GestioneParcheggio gestioneParcheggio,  Scanner scanner) {
         this.gestioneParcheggio = gestioneParcheggio;
@@ -34,9 +35,11 @@ public class MenuUtente {
                 switch(op){
                     case 1:
                         registraIngresso();
+                        gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
                         break;
                     case 2:
                         registraUscita();
+                        gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
                         break;
                     case 3:
                         gestioneParcheggio.toString();

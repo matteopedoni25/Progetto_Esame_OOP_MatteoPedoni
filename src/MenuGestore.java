@@ -1,11 +1,11 @@
 import java.util.InputMismatchException;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Scanner;
 
 
 public class MenuGestore {
     private GestioneParcheggio gestioneParcheggio;
+    public Piano piano;
     private Scanner scanner;
     private StatisticheGestore statisticheGestore;
 
@@ -13,24 +13,54 @@ public class MenuGestore {
         this.gestioneParcheggio = gestioneParcheggio;
         this.scanner = scanner;
         this.statisticheGestore = new StatisticheGestore(gestioneParcheggio);
-
     }
-
-    public void MostraMenuGetsore() {
+    public void MostraMenuGestore(){
+        boolean continua = true;
+        while(continua){
+            System.out.println(" === MENU GESTORE === ");
+            System.out.println("1. Statistiche fatturato ");
+            System.out.println("2. Statistiche Occupazione ");
+            System.out.println("3. Torna al Menu Principale");
+            System.out.println("Inserisci Selezione: ");
+            int op= 0;
+            try {
+                op = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("ERRORE INSERIMENTO!");
+                scanner.nextLine();
+                continue;
+            }
+            switch (op) {
+                case 1:
+                    MostraMenuFatturato();
+                    break;
+                case 2:
+                    //qua implemento menu Occupazione
+                    break;
+                case 3:
+                    continua = false;
+                    break;
+                default:
+                    System.out.println("Inserimento non valido!");
+            }
+        }
+    }
+    public void MostraMenuFatturato() {
         boolean continua = true;
         while (continua) {
-            System.out.println(" === MENU GESTORE === ");
-            System.out.println("1. FATTURATO TOTALE");
+            System.out.println(" === MENU FATTURATO === ");
+            System.out.println("1. Fatturato TOT");
             System.out.println("2. Fatturato per Piano");
             System.out.println("3. Visualizza Fatturato per un giorno SPECIFICO ");
-            System.out.println("4. Torna la Menu Principale ");
+            System.out.println("4. Torna la Menu Gestore ");
             System.out.println("Inserisci Selezione: ");
             int op = 0;
             try {
                 op = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("ERRORE INSERIMENTO!!\nINSERISCI UN NUMERO DA 1 A 5");
+                System.out.println("ERRORE INSERIMENTO!");
                 scanner.nextLine();
                 continue;
             }
@@ -46,13 +76,46 @@ public class MenuGestore {
                 case 3:
                     Data dataRichiesta = richiediData(this.scanner);
                    double fatturatoGiorno = statisticheGestore.calcolaFatturatoPerGiorno(dataRichiesta);
-                   System.out.println(fatturatoGiorno);
+                   int contaScontrini = statisticheGestore.contaScontriniPerGiorno(dataRichiesta);
+                    double mediaPrezzoScontrino = 0.0;
+                    if (contaScontrini > 0) {
+                        mediaPrezzoScontrino = fatturatoGiorno / contaScontrini;
+                    }
+                   System.out.println("Fatturato: "+fatturatoGiorno+"\nScontrini completati: "+contaScontrini+"\nMedia Prezzo Scontrino: "+mediaPrezzoScontrino%2);
                     break;
                 case 4:
                     continua = false;
                     break;
                 default:
                     System.out.println("Inserimento scelta invalida");
+            }
+        }
+    }
+
+    public void MostraMenuOccupazione(){
+        boolean continua = true;
+        while (continua) {
+            System.out.println(" === MENU OCCUPAZIONE === ");
+            System.out.println("1. ");
+            System.out.println("2. ");
+            System.out.println("Inserisci Selezione: ");
+            int op = 0;
+            try {
+                op = scanner.nextInt();
+                scanner.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("ERRORE INSERIMENTO!");
+                scanner.nextLine();
+                continue;
+            }
+            switch (op) {
+                case 1:
+                    break;
+                case 2:
+                    break;
+                default:
+                    System.out.println("Inserimento scelta invalida");
+
             }
         }
     }

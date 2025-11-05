@@ -77,9 +77,9 @@ public class GestioneParcheggio implements Serializable {
     public static void salvaStato(GestioneParcheggio gestione, String nomeFile) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeFile))) {
             oos.writeObject(gestione);
-            System.out.println("Dati del parcheggio salvati con successo in " + nomeFile);
+            System.out.println("Caricamento Completato!");
         } catch (IOException e) {
-            System.out.println("Errore durante il salvataggio dei dati: " + e.getMessage());
+            System.out.println("Errore durante il caricamento dei dati!");
         }
     }
 

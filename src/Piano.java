@@ -67,20 +67,10 @@ public class Piano implements Serializable {
 
     }
 
-    //Metodi utili per le statistiche lato gestore
-    public int ContaScontrini(){
-        int tot=0;
-        Data oggi = Data.Oggi();
-        for (Scontrino scontrino : scontrini) {
-            if(scontrino.Pay() && scontrino.getDataOUT() != null &&scontrino.getDataOUT().equals(oggi)){
-                tot++;
-            }
-        }
-        return tot;
-    }
+
     //Stringa dati del piano
     public String toString() {
-        return "[Piano: " + numPiano + "\nPosti Disponibili: " + postiDisponibili +"\nPosti Occupati:"+postiOccupati+"]";
+        return "[Piano: " + numPiano + ", Posti Disponibili: " + postiDisponibili +", Posti Occupati:"+postiOccupati+"]\n";
     }
 
 }

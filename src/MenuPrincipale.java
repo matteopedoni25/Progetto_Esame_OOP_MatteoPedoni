@@ -23,7 +23,7 @@ public class MenuPrincipale {
             System.out.println("\n=== MENU PRINCIPALE ===");
             System.out.println("1. Modalità Utente");
             System.out.println("2. Modalità Gestore");
-            System.out.println("3. Salva ed Esci");
+            System.out.println("3. Esci");
             System.out.println("Inserisci Selezione: ");
             int op = 0;
             try{
@@ -39,11 +39,10 @@ public class MenuPrincipale {
                     menuUtente.MostraMenuUtente();
                     break;
                 case 2:
-                    menuGestore.MostraMenuGetsore();
+                    menuGestore.MostraMenuGestore();
                     break;
                 case 3:
-                    // Salva lo stato attuale prima di uscire
-                    gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
+                    // Uscita sistema
                     System.out.println("Arrivederci!");
                     return;
                 default:
