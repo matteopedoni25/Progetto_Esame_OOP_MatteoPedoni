@@ -37,9 +37,11 @@ public class MenuGestore {
             switch (op) {
                 case 1:
                     MostraMenuFatturato();
+                    System.out.println("\n");
                     break;
                 case 2:
                     MostraMenuOccupazione();
+                    System.out.println("\n");
                     break;
                 case 3:
 
@@ -76,10 +78,12 @@ public class MenuGestore {
                 case 1:
                     double fatturatoTOT= statisticheGestore.calcolaFatturatoTotale();
                     System.out.println(fatturatoTOT);
+                    System.out.println("\n");
                     break;
                 case 2:
                     Map<Integer, Double> fatturatoPiano = statisticheGestore.calcolaFatturatoPerPiano();
                     System.out.println(fatturatoPiano);
+                    System.out.println("\n");
                     break;
                 case 3:
                     Data dataRichiesta = richiediData(this.scanner);
@@ -90,6 +94,7 @@ public class MenuGestore {
                         mediaPrezzoScontrino = fatturatoGiorno / contaScontrini;
                     }
                    System.out.println("Fatturato: "+fatturatoGiorno+"\nScontrini completati: "+contaScontrini+"\nMedia Prezzo Scontrino: "+mediaPrezzoScontrino);
+                    System.out.println("\n");
                     break;
                 case 4:
                     int mese = 0;
@@ -110,6 +115,7 @@ public class MenuGestore {
                     }
                     double fatMese = statisticheGestore.calcolaFatturatoPerMese(anno, mese);
                     System.out.println("Fatturato mensile: "+fatMese);
+                    System.out.println("\n");
                     break;
                 case 5:
                     int Year = 0;
@@ -127,6 +133,7 @@ public class MenuGestore {
                     }
                     double fatAnno = statisticheGestore.calcolaFatturatoPerAnno(Year);
                     System.out.println("Fatturato annuale: "+fatAnno);
+                    System.out.println("\n");
                     break;
                 case 6:
                     continua = false;
@@ -141,9 +148,9 @@ public class MenuGestore {
         boolean continua = true;
         while (continua) {
             System.out.println(" === MENU OCCUPAZIONE === ");
-            System.out.println("1. Calcola Occupazione per piano: ");
+            System.out.println("1. Visualizza statistiche Occupazione");
             System.out.println("2.  ");
-            System.out.println("3. Scontrini da pagare: ");
+            System.out.println("3. Visualizza scontrini in sospeso: ");
             System.out.println("4. Torna al Menu Gestore");
             System.out.println("Inserisci Selezione: ");
             int op = 0;
@@ -157,14 +164,15 @@ public class MenuGestore {
             }
             switch (op) {
                 case 1:
-                    Map<Integer, Double> occupazionePerPiano = statisticheGestore.calcolaOccupazionePerPiano();
-                    System.out.println("Griglia occupazione per piano"+occupazionePerPiano);
+                   visualizzaOccupazione();
+                    System.out.println("\n");
                     break;
                 case 2:
                     break;
                 case 3:
                     long scontrini = statisticheGestore.contaScontriniNonPagati();
                     System.out.println("Scontrini da pagare: "+scontrini);
+                    System.out.println("\n");
                     break;
                 case 4:
                     continua = false;
@@ -210,5 +218,13 @@ public class MenuGestore {
                 System.out.println("ERRORE: " + e.getMessage() + ". Riprova.");
             }
         }
+    }
+
+    private void visualizzaOccupazione() {
+        System.out.println("\n--- OCCUPAZIONE PARCHEGGIO ---");
+        Map<Integer, Double> occupazionePerPiano = statisticheGestore.calcolaOccupazionePerPiano();
+        System.out.println("Percentuale occupazione per piano: "+occupazionePerPiano);
+        System.out.println("Posti occupati: " + gestioneParcheggio.contaPostiOccupatiTotali());
+        System.out.println("Posti disponibili: " + gestioneParcheggio.contaPostiDisponibiliTotali());
     }
 }

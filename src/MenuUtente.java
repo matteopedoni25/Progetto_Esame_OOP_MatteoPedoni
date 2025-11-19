@@ -36,13 +36,16 @@ public class MenuUtente {
                     case 1:
                         registraIngresso();
                         gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
+                        System.out.println("\n");
                         break;
                     case 2:
                         registraUscita();
                         gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
+                        System.out.println("\n");
                         break;
                     case 3:
                         gestioneParcheggio.toString();
+                        System.out.println("\n");
                             break;
                     case 4:
                         System.out.println("Inserisci targa: ");
@@ -50,6 +53,7 @@ public class MenuUtente {
                         Optional<Piano> pianoOpt =  gestioneParcheggio.trovaPianoxTarga(targaV);
                         Piano piano = pianoOpt.get();
                         System.out.println("Il tuo veicolo si trova al piano: "+piano.getNumPiano());
+                        System.out.println("\n");
                         break;
                     case 5:
                         continua = false;

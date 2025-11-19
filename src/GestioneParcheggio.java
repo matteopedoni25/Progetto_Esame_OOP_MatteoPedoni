@@ -106,6 +106,18 @@ public class GestioneParcheggio implements Serializable {
         }
     }
 
+    public int contaPostiDisponibiliTotali() {
+        return piani.stream()
+                .mapToInt(Piano::getPostiDisponibili)
+                .sum();
+    }
+
+    public int contaPostiOccupatiTotali() {
+        return piani.stream()
+                .mapToInt(Piano::getPostiOccupati)
+                .sum();
+    }
+
     public String visualizzaParcheggio() {
         for(Piano piano : piani) {
             System.out.println(piano.toString());
