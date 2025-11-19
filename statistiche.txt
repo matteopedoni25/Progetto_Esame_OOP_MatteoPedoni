@@ -1,0 +1,8 @@
+=== REPORT PARCHEGGIO ===
+
+Statische del :2025/11/19
+== STATISTICE PARCHEGGIO ===
+
+Il parcheggio dispone di: 50 posti totali
+Al momento le percentuali di occupazione per piano sono: {0=0.0, 1=0.0, 2=0.0, 3=0.0, 4=0.0}
+In data odierna 2025/11/19 il fatturato è pari a: 1281.0€

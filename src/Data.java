@@ -53,6 +53,42 @@ public class Data implements Serializable {
         return LocalDate.now().isAfter(this.toLocalDate());
     }
 
+    public static Data richiediData(Scanner scanner) {
+        while (true) { // Inizia un ciclo infinito
+            try {
+                System.out.println("Inserisci la data:");
+                System.out.print("Anno (YYYY): ");
+                int anno = scanner.nextInt();
+
+                System.out.print("Mese (1-12): ");
+                int mese = scanner.nextInt();
+
+                System.out.print("Giorno (1-31): ");
+                int giorno = scanner.nextInt();
+
+                scanner.nextLine(); // Consuma il "ritorno a capo" rimasto nel buffer
+
+                // 1. Tenta di creare l'oggetto Data usando il tuo costruttore
+                // 2. Il costruttore chiamerà DataValida()
+                // 3. Se la data non è valida, lancerà IllegalArgumentException
+                Data dataInserita = new Data(anno, mese, giorno);
+
+                // 4. Se arriva qui, la data è valida. Esce dal ciclo e restituisce.
+                return dataInserita;
+
+            } catch (InputMismatchException e) {
+                // Errore: l'utente ha inserito testo invece di un numero
+                System.out.println("ERRORE: Devi inserire solo numeri. Riprova.");
+                scanner.nextLine(); // Pulisce lo scanner dall'input errato
+            } catch (IllegalArgumentException e) {
+                // Errore: i numeri formano una data non valida (es. 30/02/2024)
+                // Questo messaggio d'errore (e.getMessage()) arriva da "La data non è valida"
+                // nel tuo costruttore Data
+                System.out.println("ERRORE: " + e.getMessage() + ". Riprova.");
+            }
+        }
+    }
+
     @Override
     public  boolean equals(Object obj) {
         // 1. Controlla se è lo stesso identico oggetto in memoria
