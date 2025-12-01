@@ -117,7 +117,8 @@ public class StatisticheGestore{
         sb.append("Il parcheggio dispone di: ").append(gestioneParcheggio.contaPostiDisponibiliTotali()).append(" posti totali").append("\n");
         sb.append("Al momento le percentuali di occupazione per piano sono: ").append(calcolaOccupazionePerPiano()).append("\n");
         sb.append("In data odierna ").append(dataIN).append(" il fatturato è pari a: ").append(calcolaFatturatoPerGiorno(dataIN)).append("€").append("\n");
-
+        sb.append("Sono stati stampati: ").append(contaScontriniPerGiorno(dataIN)).append(" scontrini").append("\n");
+        sb.append("Per una media di incasso medio di: ").append(calcolaFatturatoPerGiorno(dataIN)/contaScontriniPerGiorno(dataIN)).append("€").append("\n");
         return sb.toString();
     }
 
