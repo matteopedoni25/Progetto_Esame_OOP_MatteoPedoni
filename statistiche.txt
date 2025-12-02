@@ -1,9 +1,9 @@
 === REPORT PARCHEGGIO ===
 
-Statische del :2025/11/19
+Statische del :2025/12/2
 == STATISTICHE PARCHEGGIO ===
 Il parcheggio dispone di: 50 posti totali
 Al momento le percentuali di occupazione per piano sono: {0=0.0, 1=0.0, 2=0.0, 3=0.0, 4=0.0}
-In data odierna 2025/11/19 il fatturato è pari a: 1281.0€
-Sono stati stampati: 6 scontrini
-Per una media di incasso medio di: 213.5€
+In data odierna 2025/12/2 il fatturato è pari a: 0.0€
+Sono stati stampati: 0 scontrini
+Per una media di incasso medio di: 0.0€

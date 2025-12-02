@@ -80,11 +80,14 @@ public class MenuUtente {
         if(!check.isPresent()){
             Optional<Scontrino> scontrinoOpt = gestioneParcheggio.RegistraIngresso(targaIN);
             Scontrino scontrino = scontrinoOpt.orElse(null);
-            Optional<Piano> pianoOpt =   gestioneParcheggio.trovaPianoxTarga(targaIN);
-            Piano piano = pianoOpt.get();
-            System.out.println("Recarsi al piano: "+piano.getNumPiano());
-            System.out.println("Conserva lo scontrino fino all'uscita: ");
-            System.out.println(scontrino.stampaIngresso());
+            if(scontrinoOpt.isPresent()){
+                Optional<Piano> pianoOpt = gestioneParcheggio.trovaPianoxTarga(targaIN);
+                Piano piano = pianoOpt.get();
+                System.out.println("Recarsi al piano: " + piano.getNumPiano());
+                System.out.println("Conserva lo scontrino fino all'uscita: ");
+                System.out.println(scontrino.stampaIngresso());
+            }
+            else System.out.println("Errore: impossibile generare scontrino!");
         }
         else{
             System.out.println("ERRORE: La targa inserita è gia presente nel parcheggio");

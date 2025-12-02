@@ -106,6 +106,13 @@ public class StatisticheGestore{
                 .count();
     }
 
+    public double media(double a , double b){
+        double media = (a/b);
+        if(b > 0.0){
+        return media;}
+        else return 0.0;
+    }
+
    public String generaReport(Data dataIN) {
         StringBuilder sb = new StringBuilder();
 
@@ -118,7 +125,7 @@ public class StatisticheGestore{
         sb.append("Al momento le percentuali di occupazione per piano sono: ").append(calcolaOccupazionePerPiano()).append("\n");
         sb.append("In data odierna ").append(dataIN).append(" il fatturato è pari a: ").append(calcolaFatturatoPerGiorno(dataIN)).append("€").append("\n");
         sb.append("Sono stati stampati: ").append(contaScontriniPerGiorno(dataIN)).append(" scontrini").append("\n");
-        sb.append("Per una media di incasso medio di: ").append(calcolaFatturatoPerGiorno(dataIN)/contaScontriniPerGiorno(dataIN)).append("€").append("\n");
+        sb.append("Per una media di incasso medio di: ").append(media(calcolaFatturatoPerGiorno(dataIN), contaScontriniPerGiorno(dataIN))).append("€").append("\n");
         return sb.toString();
     }
 
