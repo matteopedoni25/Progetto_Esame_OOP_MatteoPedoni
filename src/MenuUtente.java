@@ -50,10 +50,19 @@ public class MenuUtente {
                     case 4:
                         System.out.println("Inserisci targa: ");
                         String targaV = scanner.next();
+                        Optional<Piano> pianoOpt = gestioneParcheggio.trovaPianoxTarga(targaV);
+                        if (pianoOpt.isPresent()) {
+                            Piano piano = pianoOpt.get();
+                            System.out.println("Il tuo veicolo si trova al piano: " + piano.getNumPiano());
+                        } else {
+                            System.out.println("Errore: Veicolo non presente nel parcheggio!");
+                        }
+                        /* System.out.println("Inserisci targa: ");
+                        String targaV = scanner.next();
                         Optional<Piano> pianoOpt =  gestioneParcheggio.trovaPianoxTarga(targaV);
                         Piano piano = pianoOpt.get();
                         System.out.println("Il tuo veicolo si trova al piano: "+piano.getNumPiano());
-                        System.out.println("\n");
+                        System.out.println("\n");*/
                         break;
                     case 5:
                         continua = false;
