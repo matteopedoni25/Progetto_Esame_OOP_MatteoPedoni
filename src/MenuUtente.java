@@ -43,8 +43,10 @@ public class MenuUtente {
                         gestioneParcheggio.salvaStato(gestioneParcheggio, NOME_FILE_SALVATAGGIO);
                         System.out.println("\n");
                         break;
+
                     case 3:
-                        gestioneParcheggio.toString();
+
+                        System.out.println(gestioneParcheggio.toString());
                         System.out.println("\n");
                             break;
                     case 4:
@@ -57,12 +59,6 @@ public class MenuUtente {
                         } else {
                             System.out.println("Errore: Veicolo non presente nel parcheggio!");
                         }
-                        /* System.out.println("Inserisci targa: ");
-                        String targaV = scanner.next();
-                        Optional<Piano> pianoOpt =  gestioneParcheggio.trovaPianoxTarga(targaV);
-                        Piano piano = pianoOpt.get();
-                        System.out.println("Il tuo veicolo si trova al piano: "+piano.getNumPiano());
-                        System.out.println("\n");*/
                         break;
                     case 5:
                         continua = false;
@@ -70,8 +66,8 @@ public class MenuUtente {
                     default:
                         System.out.println("Inserimento scelta invalida");
                 }
-            }
         }
+    }
 
     public void registraIngresso(){
         System.out.println("Inserisci targa: ");

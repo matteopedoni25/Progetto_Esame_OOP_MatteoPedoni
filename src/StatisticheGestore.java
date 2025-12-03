@@ -72,13 +72,6 @@ public class StatisticheGestore{
                 .sum(); // Somma tutto
     }
 
-
-
-
-    /**
-     * Calcola l'occupazione per ogni piano.
-     * @return mappa con numero piano e percentuale di occupazione
-    **/
     public Map<Integer, Double> calcolaOccupazionePerPiano() {
         return gestioneParcheggio.getPiani().stream()
                 .collect(Collectors.toMap(
@@ -114,20 +107,20 @@ public class StatisticheGestore{
     }
 
    public String generaReport(Data dataIN) {
-        StringBuilder sb = new StringBuilder();
+       StringBuilder sb = new StringBuilder();
 
-        // Titolo
-        sb.append("=== REPORT PARCHEGGIO ===\n\n");
-        sb.append("Statische del :").append(dataIN).append("\n");//data In sarà inserita con il metodo RichiediData()
-        //Statistiche Generali
-        sb.append("== STATISTICHE PARCHEGGIO ===\n");
-        sb.append("Il parcheggio dispone di: ").append(gestioneParcheggio.contaPostiDisponibiliTotali()).append(" posti totali").append("\n");
-        sb.append("Al momento le percentuali di occupazione per piano sono: ").append(calcolaOccupazionePerPiano()).append("\n");
-        sb.append("In data odierna ").append(dataIN).append(" il fatturato è pari a: ").append(calcolaFatturatoPerGiorno(dataIN)).append("€").append("\n");
-        sb.append("Sono stati stampati: ").append(contaScontriniPerGiorno(dataIN)).append(" scontrini").append("\n");
-        sb.append("Per una media di incasso medio di: ").append(media(calcolaFatturatoPerGiorno(dataIN), contaScontriniPerGiorno(dataIN))).append("€").append("\n");
-        return sb.toString();
-    }
+       // Titolo
+       sb.append("=== REPORT PARCHEGGIO ===\n\n");
+       sb.append("Statische del :").append(dataIN).append("\n");//data In sarà inserita con il metodo RichiediData()
+       //Statistiche Generali
+       sb.append("== STATISTICHE PARCHEGGIO ===\n");
+       sb.append("Il parcheggio dispone di: ").append(gestioneParcheggio.contaPostiDisponibiliTotali()).append(" posti totali").append("\n");
+       sb.append("Al momento le percentuali di occupazione per piano sono: ").append(calcolaOccupazionePerPiano()).append("\n");
+       sb.append("In data odierna ").append(dataIN).append(" il fatturato è pari a: ").append(calcolaFatturatoPerGiorno(dataIN)).append("€").append("\n");
+       sb.append("Sono stati stampati: ").append(contaScontriniPerGiorno(dataIN)).append(" scontrini").append("\n");
+       sb.append("Per una media di incasso medio di: ").append(media(calcolaFatturatoPerGiorno(dataIN), contaScontriniPerGiorno(dataIN))).append("€").append("\n");
+       return sb.toString();
+   }
 
     public void salvaSuFile(String nomeFile) {
         Data data = Data.richiediData(this.scanner);
@@ -139,7 +132,4 @@ public class StatisticheGestore{
             System.out.println("Errore durante il salvataggio: " + e.getMessage());
         }
     }
-
-
-
 }

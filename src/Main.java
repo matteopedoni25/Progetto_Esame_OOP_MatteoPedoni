@@ -6,6 +6,5 @@ public class Main {
                 GestioneParcheggio.caricaStato("parcheggio.ser");
                 menuPrincipale.avviaMenu();
             }
-
-        }
+}
 

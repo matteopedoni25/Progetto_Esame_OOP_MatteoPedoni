@@ -65,15 +65,9 @@ public class Data implements Serializable {
 
                 System.out.print("Giorno (1-31): ");
                 int giorno = scanner.nextInt();
-
                 scanner.nextLine(); // Consuma il "ritorno a capo" rimasto nel buffer
-
-                // 1. Tenta di creare l'oggetto Data usando il tuo costruttore
-                // 2. Il costruttore chiamerà DataValida()
-                // 3. Se la data non è valida, lancerà IllegalArgumentException
                 Data dataInserita = new Data(anno, mese, giorno);
 
-                // 4. Se arriva qui, la data è valida. Esce dal ciclo e restituisce.
                 return dataInserita;
 
             } catch (InputMismatchException e) {
@@ -83,7 +77,6 @@ public class Data implements Serializable {
             } catch (IllegalArgumentException e) {
                 // Errore: i numeri formano una data non valida (es. 30/02/2024)
                 // Questo messaggio d'errore (e.getMessage()) arriva da "La data non è valida"
-                // nel tuo costruttore Data
                 System.out.println("ERRORE: " + e.getMessage() + ". Riprova.");
             }
         }
@@ -91,20 +84,20 @@ public class Data implements Serializable {
 
     @Override
     public  boolean equals(Object obj) {
-        // 1. Controlla se è lo stesso identico oggetto in memoria
+        // Controlla se è lo stesso identico oggetto in memoria
         if (this == obj) {
             return true;
         }
 
-        // 2. Controlla se l'oggetto è nullo o di una classe diversa
+        // Controlla se l'oggetto è nullo o di una classe diversa
         if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
 
-        // 3. Converte l'oggetto (che sappiamo essere di tipo Data)
+        // Converte l'oggetto (che sappiamo essere di tipo Data)
         Data data = (Data) obj;
 
-        // 4. Confronta i campi (uso i nomi del tuo file)
+        //Confronta i campi (uso i nomi del tuo file)
         return Anno == data.Anno &&
                 Mese == data.Mese &&
                 Giorno == data.Giorno;

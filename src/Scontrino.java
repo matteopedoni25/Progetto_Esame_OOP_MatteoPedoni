@@ -81,7 +81,6 @@ public class Scontrino implements Serializable {
         this.prezzo = ora * PREZZO_PER_ORA;
     }
 
-
     public void registraUscita( Data dataOUT, Orario Orario_Uscita){ // Riceviamo l'orario di uscita e calcoliamo il prezzo
         setUscita(dataOUT,Orario_Uscita);
         calcolaPrezzo();

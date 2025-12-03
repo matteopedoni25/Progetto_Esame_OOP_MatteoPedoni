@@ -56,8 +56,6 @@ public class Piano implements Serializable {
         return  scontrino;
     }
 
-
-
     public void registraUscita(Scontrino scontrino, Data dataOUT , Orario Orario_Uscita) {
         if (scontrini.contains(scontrino) && !scontrino.Pay()) {
             scontrino.registraUscita(dataOUT,Orario_Uscita);
@@ -66,7 +64,6 @@ public class Piano implements Serializable {
         }
 
     }
-
 
     //Stringa dati del piano
     public String toString() {

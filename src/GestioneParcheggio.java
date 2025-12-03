@@ -27,7 +27,6 @@ public class GestioneParcheggio implements Serializable {
 
     }
 
-
     public Optional<Scontrino> RegistraIngresso(String targa){ //registro l'ingresso come metodo Optional
         Optional<Piano> piano = PianoConPiuPosti();
         if (piano.isPresent()) {
@@ -39,8 +38,6 @@ public class GestioneParcheggio implements Serializable {
         }
         return Optional.empty();
     }
-
-
 
     public Optional<Piano> trovaPianoxTarga(String targa) {
         return piani.stream()
@@ -54,17 +51,14 @@ public class GestioneParcheggio implements Serializable {
     public Optional<Scontrino> registraUscitaPerTarga(String targa) {
         //Trova il piano dove si trova l'auto
         Optional<Piano> pianoOpt = trovaPianoxTarga(targa);
-
         //Se il piano è stato trovato, procedi
         if (pianoOpt.isPresent()) {
             Piano pianoTrovato = pianoOpt.get();
-
             //Trova lo scontrino ESATTO dentro il piano trovato
             //Questo è necessario per passarlo al metodo registraUscita del piano.
             Optional<Scontrino> scontrinoOpt = pianoTrovato.getScontrini().stream()
                     .filter(s -> s.getTarga_utente().equals(targa) && s.getOrario_Uscita() == null)
                     .findFirst();
-
             if (scontrinoOpt.isPresent()) {
                 Scontrino scontrinoDaRegistrare = scontrinoOpt.get();
                 pianoTrovato.registraUscita(scontrinoDaRegistrare, Data.Oggi(),Orario.adesso());
@@ -83,11 +77,6 @@ public class GestioneParcheggio implements Serializable {
         }
     }
 
-    /**
-     * Carica lo stato del parcheggio da un file.
-     * @param nomeFile Il nome del file da cui caricare.
-     * @return L'oggetto GestioneParcheggio caricato, o null se non trovato.
-     */
     public static GestioneParcheggio caricaStato(String nomeFile) {
         File file = new File(nomeFile);
         if (!file.exists()) {
@@ -117,16 +106,13 @@ public class GestioneParcheggio implements Serializable {
                 .mapToInt(Piano::getPostiOccupati)
                 .sum();
     }
-
-    public String visualizzaParcheggio() {
-        for(Piano piano : piani) {
-            System.out.println(piano.toString());
-        }
-        return null;
-    }
-
+    @Override
     public String toString() {
-        return visualizzaParcheggio();
+        StringBuilder sb = new StringBuilder();
+        for(Piano piano : piani) {
+            sb.append(piano.toString()).append("\n");
+        }
+        return sb.toString();
     }
 }
 
