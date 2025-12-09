@@ -51,7 +51,8 @@ public class MenuUtente {
                             break;
                     case 4:
                         System.out.println("Inserisci targa: ");
-                        String targaV = scanner.next();
+                        String targaV = scanner.nextLine();
+                        targaV = targaV.replace(" ","");
                         Optional<Piano> pianoOpt = gestioneParcheggio.trovaPianoxTarga(targaV);
                         if (pianoOpt.isPresent()) {
                             Piano piano = pianoOpt.get();
@@ -71,7 +72,9 @@ public class MenuUtente {
 
     public void registraIngresso(){
         System.out.println("Inserisci targa: ");
-        String targaIN = scanner.next();
+        String targaIN = scanner.nextLine();
+        targaIN = targaIN.replace(" ","");
+
         Optional<Piano> check =  gestioneParcheggio.trovaPianoxTarga(targaIN); //Controllo se la targa è gia presente nel parcheggio
         if(!check.isPresent()){
             Optional<Scontrino> scontrinoOpt = gestioneParcheggio.RegistraIngresso(targaIN);
@@ -92,7 +95,8 @@ public class MenuUtente {
 
     public void registraUscita(){
         System.out.println("Inserisci targa: ");
-        String targaOUT = scanner.next();
+        String targaOUT = scanner.nextLine();
+        targaOUT = targaOUT.replace(" ","");
         Optional<Scontrino> scontrinoOpt = gestioneParcheggio.registraUscitaPerTarga(targaOUT);
         if (scontrinoOpt.isPresent()) {
             System.out.println("Uscita registrata con successo!");
