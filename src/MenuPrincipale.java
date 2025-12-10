@@ -25,12 +25,12 @@ public class MenuPrincipale {
             System.out.println("2. Modalità Gestore");
             System.out.println("3. Esci");
             System.out.println("Inserisci Selezione: ");
-            int op = 0;
+            int op;
             try{
                 op = scanner.nextInt();
                 scanner.nextLine();
             } catch (InputMismatchException e) {
-                System.out.println("ERRORE INSERIMENTO!!\nINSERISCI UN NUMERO DA 1 A 2");
+                System.out.println("ERRORE INSERIMENTO!!\nINSERISCI UN NUMERO DA 1 A 3");
                 scanner.nextLine();
                 continue;
             }

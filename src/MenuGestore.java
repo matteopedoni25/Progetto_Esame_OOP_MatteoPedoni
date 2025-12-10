@@ -7,7 +7,6 @@ import java.util.stream.Stream;
 
 public class MenuGestore {
     private GestioneParcheggio gestioneParcheggio;
-    private Piano piano;
     private Scanner scanner;
     private StatisticheGestore statisticheGestore;
 
@@ -25,7 +24,7 @@ public class MenuGestore {
             System.out.println("3. Esporta Statistiche");
             System.out.println("4. Torna al Menu Principale");
             System.out.println("Inserisci Selezione: ");
-            int op= 0;
+            int op;
             try {
                 op = scanner.nextInt();
                 scanner.nextLine();
@@ -65,7 +64,7 @@ public class MenuGestore {
             System.out.println("5. Visualizza Fatturato per Anno");
             System.out.println("6. Torna la Menu Gestore ");
             System.out.println("Inserisci Selezione: ");
-            int op = 0;
+            int op ;
             try {
                 op = scanner.nextInt();
                 scanner.nextLine();
@@ -152,7 +151,7 @@ public class MenuGestore {
             System.out.println("2. Visualizza scontrini in sospeso: ");
             System.out.println("3. Torna al Menu Gestore");
             System.out.println("Inserisci Selezione: ");
-            int op = 0;
+            int op ;
             try {
                 op = scanner.nextInt();
                 scanner.nextLine();

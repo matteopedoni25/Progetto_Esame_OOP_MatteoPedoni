@@ -76,7 +76,7 @@ public class MenuUtente {
         targaIN = targaIN.replace(" ","");
 
         Optional<Piano> check =  gestioneParcheggio.trovaPianoxTarga(targaIN); //Controllo se la targa è gia presente nel parcheggio
-        if(!check.isPresent()){
+        if(check.isEmpty()){
             Optional<Scontrino> scontrinoOpt = gestioneParcheggio.RegistraIngresso(targaIN);
             Scontrino scontrino = scontrinoOpt.orElse(null);
             if(scontrinoOpt.isPresent()){
